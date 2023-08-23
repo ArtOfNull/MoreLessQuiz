@@ -1,0 +1,21 @@
+.gameboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.filmcards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.film-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.film-card p {
+    min-height: 21.5px;
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Titanic",
+        "rating": 7.9,
+        "logo": "../posters/titanic.jpg"
+    },
+    {
+        "name": "King Kong",
+        "rating": 7.2,
+        "logo": "../posters/king-kong.jpg"
+    },
+    {
+        "name": "Avatar",
+        "rating": 7.9,
+        "logo": "../posters/avatar.jpeg"
+    }
+]
