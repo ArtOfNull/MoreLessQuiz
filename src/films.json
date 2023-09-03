@@ -13,5 +13,10 @@
         "name": "Avatar",
         "rating": 7.9,
         "logo": "../posters/avatar.jpeg"
+    },
+    {
+        "name": "Dune (2021)",
+        "rating": 8,
+        "logo": "../posters/dune.jpg"
     }
 ]

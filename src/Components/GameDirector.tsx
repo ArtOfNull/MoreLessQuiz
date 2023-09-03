@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import films from '../films.json';
-import { FilmCard, Film, GuessCard } from './FilmCard';
+import { FilmCard, Film, GuessCard, BlankCard } from './FilmCard';
 import { MoreButton, LessButton } from './PlayerButtons';
 import './style.css';
 
@@ -10,8 +10,10 @@ const filmArray: Film[] = films as Film[];
 export const GameBoard: React.FC = () => {
     const [leftFilmIndex, setLeftFilmIndex] = useState(0);
     const [rightFilmIndex, setRightFilmIndex] = useState(1);
+    const [blankFilmIndex, setBlankFilmIndex] = useState(2);
     const [score, setScore] = useState(0);
     const [isRatingHidden, setIsRatingHidden] = useState(true);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const [guessResponse, setGuessResponse] = useState("You are Right!");
 
     const WaitAfterGuessed = (delay: number) => {
@@ -27,12 +29,16 @@ export const GameBoard: React.FC = () => {
             setScore(score + 1);
             setIsRatingHidden(false);
             await WaitAfterGuessed(1000);
+            setIsTransitioning(true);
+            await WaitAfterGuessed(500);
             setIsRatingHidden(true);
             setLeftFilmIndex(rightFilmIndex);
-            setRightFilmIndex(rightFilmIndex + 1);
+            setRightFilmIndex(blankFilmIndex);
+            setBlankFilmIndex(blankFilmIndex == filmArray.length - 1 ? 0 : blankFilmIndex + 1);
+            setIsTransitioning(false);
         } else {
             // User made a mistake - end the game or display a message
-            setGuessResponse("Sorry, you are Wrong :(");
+            setGuessResponse("Sorry :( You are Wrong");
             setIsRatingHidden(false);
             await WaitAfterGuessed(1000);
             alert(`Game Over! Your Score: ${score}`);
@@ -40,15 +46,25 @@ export const GameBoard: React.FC = () => {
     };
 
     return (
-        <div className='gameboard'>
-            <div className='filmcards'>
+        <div className='game-board'>
+            <div className='film-cards'>
+                <div className='cards-in-play'>
+                    <FilmCard film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                    <GuessCard film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} />
+                </div>
                 {/* FilmCard component displays the film data */}
-                <FilmCard film={filmArray[leftFilmIndex]} />
-                <GuessCard film={filmArray[rightFilmIndex]} isHidden={isRatingHidden} message={guessResponse} />
+                <div className='blank-card-wrapper'>
+                    <BlankCard film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                </div>
+
             </div>
-            <div>
+            <div className='progress-field'>
+                <p>{isRatingHidden ? `Guessed: ${leftFilmIndex}/${filmArray.length - 1}` : guessResponse}</p>
+            </div>
+            <div className='buttons'>
                 {/* MoreButton and LessButton components for user input */}
                 <MoreButton onClick={() => handleGuess('more')} />
+                <div className='filler'></div>
                 <LessButton onClick={() => handleGuess('less')} />
             </div>
         </div>
