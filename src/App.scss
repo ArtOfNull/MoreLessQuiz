@@ -1,0 +1,49 @@
+@use "Components/FilmCard.scss";
+@use "Components/PlayerButtons.scss";
+
+body {
+    background-color: #263666;
+}
+
+.gameboard {
+    background-color: #0d142b;
+    border: 5px solid black;
+    box-sizing: border-box;
+    width: 75%;
+    height: 95%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.filler {
+    min-width: 4em;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.margin_zero {
+    margin: 0;
+}
+
+
+.progress_field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    background-color: #263666;
+    border: 1px solid black;
+    border-radius: 5em;
+    color: #ffffff;
+    width: 10.5em;
+    height: 3em;
+    margin: 0.5em;
+}

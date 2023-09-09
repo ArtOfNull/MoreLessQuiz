@@ -1,0 +1,124 @@
+$darkblue: #0d142b;
+$lightblue: #263666;
+$blue: #183382;
+
+
+.film_card_player_zone {
+    box-shadow: 0.2px 0.2px 2px 1px #474747;
+    padding: 1em;
+    margin-top: 1em;
+    overflow: hidden;
+    display: flex;
+    width: 41.5em;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.film_card_wrapper {
+    position: relative;
+    display: flex;
+    left: -2em;
+}
+
+.film_card_active_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.filler {
+    min-width: 4em;
+}
+
+.film_name_wrapper {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+
+    width: 100%;
+    height: 4em;
+}
+
+.film_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3.125em;
+    border: 2px solid $darkblue;
+}
+
+.film_card {
+    border: 2px solid $darkblue;
+    margin-left: 2em;
+    margin-right: 2em;
+    box-shadow: 1px 1px 5px rgb(20, 20, 20);
+    background-color: $lightblue;
+    display: flex;
+    width: 18.75em;
+    flex-direction: column;
+    box-sizing: border-box;
+    color: rgb(222, 222, 222);
+
+    h2 {
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $darkblue;
+        border: 1px solid black;
+        border-radius: 5em;
+        height: 2em;
+        width: 7em;
+        color: #ffffff;
+    }
+
+    p {
+        min-height: 1em;
+        min-width: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 40px;
+        font-weight: 800;
+
+    }
+
+
+}
+
+.anim_slide_left {
+    transform: translateX(-121.05%);
+    transition: transform 0.5s ease-in-out;
+}
+
+
+
+.hidden {
+    visibility: hidden;
+}
+
+.film_card_nonactive_wrapper {
+    height: 100%;
+}
+
+.rating_text_wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+    min-height: 2em;
+}
+
+.rating_text {
+    background-color: $blue;
+    border: 1px solid $darkblue;
+    border-radius: 50px;
+    font-size: 40px;
+    margin-left: 2.75em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    height: 2em;
+    width: 2em;
+}

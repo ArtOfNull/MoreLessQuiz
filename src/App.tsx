@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import GameBoard from './Components/GameDirector'
 
 function App() {

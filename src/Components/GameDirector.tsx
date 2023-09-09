@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import films from '../films.json';
 import { FilmCard, Film, GuessCard, BlankCard } from './FilmCard';
 import { MoreButton, LessButton } from './PlayerButtons';
-import './style.css';
-
+import styles from '../App.module.scss';
 
 const filmArray: Film[] = films as Film[];
 
@@ -46,25 +45,28 @@ export const GameBoard: React.FC = () => {
     };
 
     return (
-        <div className='game-board'>
-            <div className='film-cards'>
-                <div className='cards-in-play'>
-                    <FilmCard film={filmArray[leftFilmIndex]} transition={isTransitioning} />
-                    <GuessCard film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} />
-                </div>
-                {/* FilmCard component displays the film data */}
-                <div className='blank-card-wrapper'>
-                    <BlankCard film={filmArray[blankFilmIndex]} transition={isTransitioning} />
-                </div>
+        <div className={styles.gameboard}>
+            <div className={styles.film_card_player_zone}>
+                <div className={styles.film_card_wrapper}>
+                    <div className={styles.film_card_active_wrapper}>
+                        <FilmCard film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                        <GuessCard film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} />
+                    </div>
+                    {/* FilmCard component displays the film data */}
+                    <div className={styles.film_card_nonactive_wrapper}>
+                        <BlankCard film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                    </div>
 
+                </div>
             </div>
-            <div className='progress-field'>
+
+            <div className={styles.progress_field}>
                 <p>{isRatingHidden ? `Guessed: ${leftFilmIndex}/${filmArray.length - 1}` : guessResponse}</p>
             </div>
-            <div className='buttons'>
+            <div className={styles.buttons}>
                 {/* MoreButton and LessButton components for user input */}
                 <MoreButton onClick={() => handleGuess('more')} />
-                <div className='filler'></div>
+                <div className={styles.filler}></div>
                 <LessButton onClick={() => handleGuess('less')} />
             </div>
         </div>
