@@ -24,7 +24,6 @@ export const GameBoard: React.FC = () => {
         const rightRating = filmArray[rightFilmIndex].rating;
 
         if ((guess === 'more' && leftRating < rightRating) || (guess === 'less' && leftRating > rightRating)) {
-            // User guessed correctly
             setScore(score + 1);
             setIsRatingHidden(false);
             await WaitAfterGuessed(1000);
@@ -36,7 +35,6 @@ export const GameBoard: React.FC = () => {
             setBlankFilmIndex(blankFilmIndex == filmArray.length - 1 ? 0 : blankFilmIndex + 1);
             setIsTransitioning(false);
         } else {
-            // User made a mistake - end the game or display a message
             setGuessResponse("Sorry :( You are Wrong");
             setIsRatingHidden(false);
             await WaitAfterGuessed(1000);
@@ -50,13 +48,11 @@ export const GameBoard: React.FC = () => {
                 <div className={styles.film_card_wrapper}>
                     <div className={styles.film_card_active_wrapper}>
                         <FilmCard film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                        <div className={styles.filler_mobile}></div>
                         <GuessCard film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} />
-                    </div>
-                    {/* FilmCard component displays the film data */}
-                    <div className={styles.film_card_nonactive_wrapper}>
+                        <div className={styles.filler_mobile}></div>
                         <BlankCard film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                     </div>
-
                 </div>
             </div>
 
@@ -64,7 +60,6 @@ export const GameBoard: React.FC = () => {
                 <p>{isRatingHidden ? `Guessed: ${leftFilmIndex}/${filmArray.length - 1}` : guessResponse}</p>
             </div>
             <div className={styles.buttons}>
-                {/* MoreButton and LessButton components for user input */}
                 <MoreButton onClick={() => handleGuess('more')} />
                 <div className={styles.filler}></div>
                 <LessButton onClick={() => handleGuess('less')} />
