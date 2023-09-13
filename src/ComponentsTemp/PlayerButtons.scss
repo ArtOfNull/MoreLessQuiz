@@ -1,0 +1,91 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 0.3em;
+    z-index: 2;
+    height: 2em;
+}
+
+$box-shadow-color-red: #cf866c;
+$box-shadow-color-blue: #29bbff;
+$background-color-red: #bc3315;
+$background-color-blue: #0688fa;
+$text-shadow-red: #854629;
+$text-shadow-blue: #263666;
+$background-color-hover-red: #d0451b;
+$background-color-hover-blue: #2dabf9;
+$text-color: #ffffff;
+$border-color: #0b0e07;
+
+%game_button {
+
+    border-radius: 1.6em;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Verdana;
+    font-size: 0.8em;
+    font-weight: bold;
+    min-width: 50%;
+    max-width: 50%;
+    padding: 0.625em 0.75em;
+    border: 1px solid $border-color;
+    color: $text-color;
+    text-decoration: none;
+}
+
+%game_button:active {
+    position: relative;
+    top: 1px;
+}
+
+.game_button_more {
+    @extend %game_button;
+    margin-right: 0.1em;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background-color: $background-color-red;
+    text-shadow: 1px 1px 2px $text-shadow-red;
+
+    &:hover {
+        background-color: $background-color-hover-red;
+        box-shadow: 0px 0px 3px 0px $box-shadow-color-red;
+    }
+
+    &:active {
+        position: relative;
+        top: 2px;
+    }
+
+
+}
+
+
+.game_button_less {
+    @extend %game_button;
+    margin-left: 0.1em;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background-color: $background-color-blue;
+    text-shadow: 1px 1px 2px $text-shadow-blue;
+
+    &:hover {
+        background-color: $background-color-hover-blue;
+        box-shadow: 0px 0px 3px 0px $box-shadow-color-blue;
+
+    }
+
+    &:active {
+        position: relative;
+        top: 2px;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+@media (min-width: 601px) {
+    .buttons {
+        top: 2em;
+    }
+}

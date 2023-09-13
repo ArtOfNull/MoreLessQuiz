@@ -1,0 +1,81 @@
+@use "ComponentsTemp/Film.scss";
+@use "ComponentsTemp/PlayerButtons.scss";
+
+$darkblue: #0d142b;
+$lightblue: #263666;
+$blue: #13296e;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    overflow: hidden;
+}
+
+.gameboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.film_divider {
+    position: absolute;
+    $divider_height: 0.125em;
+    height: $divider_height;
+    width: 100%;
+    background: white;
+    z-index: 10;
+    top: calc(50% - ($divider_height / 2));
+    left: 0;
+}
+
+.progress_field_wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    $progress_field_height: 2em;
+    $progress_field_width: 8em;
+    height: $progress_field_height;
+    width: $progress_field_width;
+    top: calc(50% - ($progress_field_height / 2));
+    left: calc(50% - ($progress_field_width / 2));
+    z-index: 10;
+    color: #fff;
+    background-color: $lightblue;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 0.1em solid $darkblue;
+    border-radius: 1em;
+}
+
+.progress_field_text {
+    width: auto;
+}
+
+@media (min-width: 601px) {
+
+    .gameboard {
+        display: inline-block;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .film_divider {
+        position: absolute;
+        $divider_height: 100vh;
+        height: $divider_height;
+        $divider_width: 0.125em;
+        width: $divider_width;
+        background: white;
+        z-index: 10;
+        left: calc(50% - ($divider_width / 2));
+        top: 0;
+    }
+}

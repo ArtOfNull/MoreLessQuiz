@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
-import GameBoard from './Components/GameDirector'
+import './Style.scss';
+import GameBoard from './ComponentsTemp/Director'
 
 function App() {
   return (
