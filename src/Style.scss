@@ -18,6 +18,30 @@ body {
     overflow: hidden;
 }
 
+.menu {
+    background-color: $lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+}
+
+.guess_response {
+    white-space: pre-line;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2em;
+}
+
+.score_text {
+    text-align: center;
+    color: #fff;
+}
+
+
 .gameboard {
     display: flex;
     flex-direction: column;
@@ -42,7 +66,7 @@ body {
     justify-content: center;
     align-items: center;
     $progress_field_height: 2em;
-    $progress_field_width: 8em;
+    $progress_field_width: 4.5em;
     height: $progress_field_height;
     width: $progress_field_width;
     top: calc(50% - ($progress_field_height / 2));
@@ -57,6 +81,10 @@ body {
 
 .progress_field_text {
     width: auto;
+}
+
+.display_none {
+    display: none;
 }
 
 @media (min-width: 601px) {
@@ -78,4 +106,9 @@ body {
         left: calc(50% - ($divider_width / 2));
         top: 0;
     }
+
+    .display_none {
+        display: none;
+    }
+
 }

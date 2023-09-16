@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../Style.module.scss';
 import { MoreButton, LessButton } from './PlayerButtons';
+import { Rating } from './Rating';
 export type Film = {
     name: string;
     rating: number;
@@ -41,18 +42,19 @@ export const GuessCard: React.FC<FilmProp> = ({ film, transition, isHidden, OnCl
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
-            <div className={styles.filmcard_rating_wrapper}>
+            <div className={isHidden ? `${styles.filmcard_rating_wrapper} ${styles.display_none}` : `${styles.filmcard_rating_wrapper}`}>
                 <p className={styles.filmcard_rating_text}>Imdb Rating:</p>
                 <div>
-                    <p className={styles.filmcard_rating_number}>{isHidden ? "???" : film.rating}</p>
+                    <Rating ratingNumber={film.rating} isHidden={isHidden} />
                 </div>
 
             </div>
-            <div className={transition ? `${styles.buttons} ${styles.hidden}` : `${styles.buttons}`}>
+            <div className={!isHidden ? `${styles.display_none} ${styles.buttons}` : `${styles.buttons}`}>
                 <MoreButton onClick={() => OnClick?.('more')} />
                 <div className={styles.filler}></div>
                 <LessButton onClick={() => OnClick?.('less')} />
             </div>
+            <div className={styles.filler_buttons}></div>
         </div>
     );
 }
@@ -65,11 +67,10 @@ export const BlankCard: React.FC<FilmProp> = ({ film, transition }) => {
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
-            <div className={styles.filmcard_rating_wrapper}>
-                <p className={styles.filmcard_rating_text}>Imdb Rating:</p>
-                <div>
-                    <p className={styles.filmcard_rating_number}>???</p>
-                </div>
+            <div className={`${styles.buttons}`}>
+                <p className={styles.game_button_more}>More</p>
+                <div className={styles.filler}></div>
+                <p className={styles.game_button_less}>Less</p>
             </div>
             <div className={styles.filler_buttons}></div>
         </div>

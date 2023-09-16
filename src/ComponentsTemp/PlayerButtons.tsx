@@ -15,6 +15,10 @@ const Button: React.FC<ButtonProps> = ({ onClick, buttonText, buttonClass }) => 
     );
 };
 
+export const RestartButton: React.FC<ButtonProps> = ({ onClick }) => {
+    return <Button onClick={onClick} buttonText="Restart" buttonClass={styles.game_button_restart_menu} />;
+}
+
 export const MoreButton: React.FC<ButtonProps> = ({ onClick }) => {
     return <Button onClick={onClick} buttonText="More" buttonClass={styles.game_button_more} />;
 };

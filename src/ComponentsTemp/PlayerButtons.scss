@@ -5,7 +5,9 @@
     position: relative;
     margin-top: 0.3em;
     z-index: 2;
-    height: 2em;
+    padding-top: 2em;
+    min-height: 5em;
+    height: 5em;
 }
 
 $box-shadow-color-red: #cf866c;
@@ -27,9 +29,10 @@ $border-color: #0b0e07;
     font-family: Verdana;
     font-size: 0.8em;
     font-weight: bold;
-    min-width: 50%;
+    width: 50%;
     max-width: 50%;
     padding: 0.625em 0.75em;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     border: 1px solid $border-color;
     color: $text-color;
     text-decoration: none;
@@ -43,7 +46,7 @@ $border-color: #0b0e07;
 .game_button_more {
     @extend %game_button;
     margin-right: 0.1em;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    min-width: 50%;
     background-color: $background-color-red;
     text-shadow: 1px 1px 2px $text-shadow-red;
 
@@ -64,7 +67,7 @@ $border-color: #0b0e07;
 .game_button_less {
     @extend %game_button;
     margin-left: 0.1em;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    min-width: 50%;
     background-color: $background-color-blue;
     text-shadow: 1px 1px 2px $text-shadow-blue;
 
@@ -80,12 +83,33 @@ $border-color: #0b0e07;
     }
 }
 
+.game_button_restart_menu {
+    @extend %game_button;
+    margin-top: 2em;
+    width: 10em;
+    background-color: $background-color-blue;
+    text-shadow: 1px 1px 2px rgb(18, 18, 44);
+
+    &:active {
+        position: relative;
+        top: 2px;
+    }
+}
+
 .hidden {
     visibility: hidden;
 }
 
+.display_none {
+    display: none;
+}
+
 @media (min-width: 601px) {
     .buttons {
-        top: 2em;
+        //top: 2em;
+    }
+
+    .display_none {
+        display: none;
     }
 }
