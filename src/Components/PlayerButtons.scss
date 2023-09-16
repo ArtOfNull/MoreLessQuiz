@@ -1,0 +1,122 @@
+.buttons {
+    display: flex;
+}
+
+$box-shadow-color-red: #cf866c;
+$box-shadow-color-blue: #29bbff;
+$background-color-red: #bc3315;
+$background-color-blue: #0688fa;
+$text-shadow-red: #854629;
+$text-shadow-blue: #263666;
+$background-color-hover-red: #d0451b;
+$background-color-hover-blue: #2dabf9;
+$text-color: #ffffff;
+$border-color: #0b0e07;
+
+%game_button {
+
+    border-radius: 26px;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Verdana;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 18px;
+    border: 1px solid $border-color;
+    color: $text-color;
+    text-decoration: none;
+    margin-bottom: 2em;
+}
+
+%game_button:active {
+    position: relative;
+    top: 1px;
+}
+
+.game_button_more {
+    @extend %game_button;
+
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background-color: $background-color-red;
+    text-shadow: 1px 1px 2px $text-shadow-red;
+
+    &:hover {
+        background-color: $background-color-hover-red;
+        box-shadow: 0px 0px 3px 0px $box-shadow-color-red;
+    }
+
+    &:active {
+        position: relative;
+        top: 2px;
+    }
+
+
+}
+
+
+.game_button_less {
+    @extend %game_button;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background-color: $background-color-blue;
+    text-shadow: 1px 1px 2px $text-shadow-blue;
+
+    &:hover {
+        background-color: $background-color-hover-blue;
+        box-shadow: 0px 0px 3px 0px $box-shadow-color-blue;
+
+    }
+
+    &:active {
+        position: relative;
+        top: 2px;
+    }
+}
+
+@media (max-width:600px) {
+
+    .buttons {
+        display: flex;
+        position: absolute;
+    }
+
+    %game_button {
+
+        border-radius: 50px;
+        display: inline-block;
+        cursor: pointer;
+        font-family: Verdana;
+        font-size: 18px;
+        height: 3.33em;
+        width: 5em;
+        font-weight: bold;
+        padding: 15px 18px;
+        border: 1px solid $border-color;
+        color: $text-color;
+        text-decoration: none;
+        margin-bottom: 2em;
+    }
+
+    .game_button_more {
+        position: absolute;
+        top: 50%;
+        left: -180%;
+        transform: translate(-50%, -50%);
+
+        &:active {
+            position: relative;
+            top: 0px;
+        }
+    }
+
+    .game_button_less {
+        position: absolute;
+        top: 50%;
+        left: 280%;
+        transform: translate(-50%, -50%);
+
+        &:active {
+            position: relative;
+            top: 0px;
+        }
+    }
+}
