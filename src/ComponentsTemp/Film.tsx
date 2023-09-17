@@ -11,15 +11,17 @@ export type Film = {
 type FilmProp = {
     film: Film;
     transition: boolean;
+    color: React.CSSProperties;
     isHidden?: boolean;
     OnClick?: (arg: 'more' | 'less') => void;
+
 }
 
-export const FilmCard: React.FC<FilmProp> = ({ film, transition }) => {
+export const FilmCard: React.FC<FilmProp> = ({ film, transition, color }) => {
 
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+            <img id='logo1' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
@@ -35,10 +37,10 @@ export const FilmCard: React.FC<FilmProp> = ({ film, transition }) => {
     );
 }
 
-export const GuessCard: React.FC<FilmProp> = ({ film, transition, isHidden, OnClick }) => {
+export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, isHidden, OnClick }) => {
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+            <img id='logo2' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
@@ -59,11 +61,11 @@ export const GuessCard: React.FC<FilmProp> = ({ film, transition, isHidden, OnCl
     );
 }
 
-export const BlankCard: React.FC<FilmProp> = ({ film, transition }) => {
+export const BlankCard: React.FC<FilmProp> = ({ film, transition, color }) => {
 
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+            <img id='logo3' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>

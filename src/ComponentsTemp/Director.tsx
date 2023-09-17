@@ -3,9 +3,12 @@ import films from '../films.json';
 import { FilmCard, Film, GuessCard, BlankCard } from './Film';
 import { RestartButton } from './PlayerButtons';
 import styles from '../Style.module.scss';
-
+import ColorThief from 'colorthief';
+import { rgbToHex } from '../ColorManager';
 const filmArray: Film[] = films as Film[];
 filmArray.sort(() => Math.random() - 0.5);
+const colorThief = new ColorThief();
+
 
 export const GameBoard: React.FC = () => {
     const [leftFilmIndex, setLeftFilmIndex] = useState(0);
@@ -17,14 +20,21 @@ export const GameBoard: React.FC = () => {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [guessResponse, setGuessResponse] = useState("You guessed everything!");
     const [isMenuOn, setIsMenuOn] = useState(false);
+    const [colorFilmCard, setColorFilmCard] = useState('');
+    const [colorGuessCard, setColorGuessCard] = useState('');
+    const [colorBlankCard, setColorBlankCard] = useState('');
+    const [transitioned, setTransitioned] = useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false);
+
     const WaitAfterGuessed = (delay: number) => {
         return new Promise(res => setTimeout(res, delay));
     }
 
+    document.getElementById('film1')?.style.backgroundColor
     const handleGuess = async (guess: 'more' | 'less') => {
         const leftRating = filmArray[leftFilmIndex].rating;
         const rightRating = filmArray[rightFilmIndex].rating;
-
+        if (!isGameStarted) setIsGameStarted(true);
         if ((guess === 'more' && leftRating <= rightRating) || (guess === 'less' && leftRating >= rightRating)) {
             setScore(score + 1);
             setIsRatingHidden(false);
@@ -39,6 +49,7 @@ export const GameBoard: React.FC = () => {
                 setRightFilmIndex(blankFilmIndex);
                 setBlankFilmIndex(blankFilmIndex == filmArray.length - 1 ? 0 : blankFilmIndex + 1);
                 setIsTransitioning(false);
+                setTransitioned(true);
             }
 
         } else {
@@ -69,6 +80,16 @@ export const GameBoard: React.FC = () => {
         localStorage.setItem('highscore', JSON.stringify(highscore));
     }, [highscore]);
 
+    useEffect(() => {
+
+        if (isGameStarted && transitioned) {
+            setColorFilmCard(rgbToHex(colorThief.getColor(document.getElementById('logo1')! as HTMLImageElement)));
+            setColorGuessCard(rgbToHex(colorThief.getColor(document.getElementById('logo2')! as HTMLImageElement)));
+            setTransitioned(false);
+        }
+
+    }, [transitioned]);
+
     return (
         <div className={styles.main_board}>
             <div className={isMenuOn ? `${styles.menu}` : `${styles.menu} ${styles.display_none}`}>
@@ -78,10 +99,10 @@ export const GameBoard: React.FC = () => {
             </div>
             <div className={!isMenuOn ? `${styles.gameboard}` : `${styles.gameboard} ${styles.display_none}`}>
                 <div className={styles.filmcard_wrapper}>
-                    <FilmCard film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                    <FilmCard color={{ backgroundColor: colorFilmCard }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
                     <div className={isMenuOn ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
-                    <GuessCard film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
-                    <BlankCard film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                    <GuessCard color={{ backgroundColor: colorGuessCard }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
+                    <BlankCard color={{ backgroundColor: colorBlankCard }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                 </div>
 
                 <div className={isMenuOn ? `${styles.progress_field_wrapper} ${styles.display_none}` : `${styles.progress_field_wrapper}`}>
