@@ -21,7 +21,7 @@ export const FilmCard: React.FC<FilmProp> = ({ film, transition, color }) => {
 
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img id='logo1' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
@@ -40,7 +40,7 @@ export const FilmCard: React.FC<FilmProp> = ({ film, transition, color }) => {
 export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, isHidden, OnClick }) => {
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img id='logo2' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
@@ -61,11 +61,11 @@ export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, isHidde
     );
 }
 
-export const BlankCard: React.FC<FilmProp> = ({ film, transition, color }) => {
+export const BlankCard: React.FC<FilmProp> = ({ film, transition, color, }) => {
 
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
-            <img id='logo3' className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
+            <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
             </div>
