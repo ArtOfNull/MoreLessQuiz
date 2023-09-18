@@ -13,7 +13,9 @@ export const GameBoard: React.FC = () => {
     const [rightFilmIndex, setRightFilmIndex] = useState(1);
     const [blankFilmIndex, setBlankFilmIndex] = useState(2);
     const [score, setScore] = useState(0);
-    const [highscore, setHighscore] = useState(JSON.parse(localStorage.getItem('highscore')!) || 0);
+    const storedHighscore = window.localStorage.getItem('highscore');
+    const initialHighscore = storedHighscore ? JSON.parse(storedHighscore) : 0;
+    const [highscore, setHighscore] = useState<number>(initialHighscore);
     const [isRatingHidden, setIsRatingHidden] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [guessResponse, setGuessResponse] = useState("You guessed everything!");
@@ -84,18 +86,18 @@ export const GameBoard: React.FC = () => {
                 <div className={styles.filmcard_wrapper}>
                     <Color src={filmArray[leftFilmIndex].logo} format='hex'>
                         {({ data, loading, error }) => (
-                            <FilmCard color={{ backgroundColor: data }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                            <FilmCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
                         )}
                     </Color>
                     <div className={isMenuOn ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
                     <Color src={filmArray[rightFilmIndex].logo} format='hex'>
                         {({ data, loading, error }) => (
-                            <GuessCard color={{ backgroundColor: data }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
+                            <GuessCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
                         )}
                     </Color>
                     <Color src={filmArray[blankFilmIndex].logo} format='hex'>
                         {({ data, loading, error }) => (
-                            <BlankCard color={{ backgroundColor: data }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                            <BlankCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                         )}
                     </Color>
                 </div>
