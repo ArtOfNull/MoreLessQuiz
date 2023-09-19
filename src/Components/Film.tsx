@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../Style.module.scss';
+import styles from '../App.module.scss';
 import { MoreButton, LessButton } from './PlayerButtons';
 import { Rating } from './Rating';
 export type Film = {
@@ -11,14 +11,17 @@ export type Film = {
 type FilmProp = {
     film: Film;
     transition: boolean;
+    color: React.CSSProperties;
+    colorLoading: boolean;
+    colorError: string | undefined;
     isHidden?: boolean;
     OnClick?: (arg: 'more' | 'less') => void;
+
 }
 
-export const FilmCard: React.FC<FilmProp> = ({ film, transition }) => {
-
+export const FilmCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError }) => {
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
@@ -35,9 +38,9 @@ export const FilmCard: React.FC<FilmProp> = ({ film, transition }) => {
     );
 }
 
-export const GuessCard: React.FC<FilmProp> = ({ film, transition, isHidden, OnClick }) => {
+export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError, isHidden, OnClick }) => {
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>
@@ -59,10 +62,9 @@ export const GuessCard: React.FC<FilmProp> = ({ film, transition, isHidden, OnCl
     );
 }
 
-export const BlankCard: React.FC<FilmProp> = ({ film, transition }) => {
-
+export const BlankCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError }) => {
     return (
-        <div className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
+        <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
             <div className={styles.filmcard_title_wrapper}>
                 <h2>{film.name}</h2>

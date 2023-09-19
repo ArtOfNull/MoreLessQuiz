@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../Style.module.scss'
+import styles from '../App.module.scss'
 
 interface FilmRatingProps {
     ratingNumber: number;
