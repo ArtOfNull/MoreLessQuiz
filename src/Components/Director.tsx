@@ -85,19 +85,19 @@ export const GameBoard: React.FC = () => {
             <div className={!isMenuOn ? `${styles.gameboard}` : `${styles.gameboard} ${styles.display_none}`}>
                 <div className={styles.filmcard_wrapper}>
                     <Color src={filmArray[leftFilmIndex].logo} format='hex'>
-                        {({ data, loading, error }) => (
-                            <FilmCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                        {({ data }) => (
+                            <FilmCard color={{ backgroundColor: data }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
                         )}
                     </Color>
                     <div className={isMenuOn ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
                     <Color src={filmArray[rightFilmIndex].logo} format='hex'>
-                        {({ data, loading, error }) => (
-                            <GuessCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
+                        {({ data }) => (
+                            <GuessCard color={{ backgroundColor: data }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
                         )}
                     </Color>
                     <Color src={filmArray[blankFilmIndex].logo} format='hex'>
-                        {({ data, loading, error }) => (
-                            <BlankCard color={{ backgroundColor: data }} colorLoading={loading} colorError={error} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                        {({ data }) => (
+                            <BlankCard color={{ backgroundColor: data }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                         )}
                     </Color>
                 </div>
