@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../Style.module.scss';
+import styles from '../App.module.scss';
 import { MoreButton, LessButton } from './PlayerButtons';
 import { Rating } from './Rating';
 export type Film = {
@@ -20,8 +20,6 @@ type FilmProp = {
 }
 
 export const FilmCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError }) => {
-    console.log(colorLoading);
-    console.log(colorError);
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
@@ -41,8 +39,6 @@ export const FilmCard: React.FC<FilmProp> = ({ film, transition, color, colorLoa
 }
 
 export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError, isHidden, OnClick }) => {
-    console.log(colorLoading);
-    console.log(colorError);
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>
@@ -67,9 +63,6 @@ export const GuessCard: React.FC<FilmProp> = ({ film, transition, color, colorLo
 }
 
 export const BlankCard: React.FC<FilmProp> = ({ film, transition, color, colorLoading, colorError }) => {
-
-    console.log(colorLoading);
-    console.log(colorError);
     return (
         <div style={color} className={transition ? `${styles.filmcard} ${styles.anim_slide}` : `${styles.filmcard}`}>
             <img className={styles.filmcard_poster} src={film.logo} alt={film.name}></img>

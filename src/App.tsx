@@ -1,7 +1,6 @@
 import React from 'react';
-import './Style.scss';
-import GameBoard from './ComponentsTemp/Director'
-
+import './App.scss';
+import GameBoard from './Components/Director'
 function App() {
   return (
     <div className="App">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import films from '../films.json';
 import { FilmCard, Film, GuessCard, BlankCard } from './Film';
 import { RestartButton } from './PlayerButtons';
-import styles from '../Style.module.scss';
+import styles from '../App.module.scss';
 import Color from 'color-thief-react';
 const filmArray: Film[] = films as Film[];
 filmArray.sort(() => Math.random() - 0.5);
