@@ -4,11 +4,11 @@ import { FilmCard, Film, GuessCard, BlankCard } from './Film';
 import { RestartButton } from './PlayerButtons';
 import styles from '../App.module.scss';
 import { SetupColors, GetBlankColor } from '../ColorManager';
-let filmArray: Film[] = films as Film[];
-filmArray.sort(() => Math.random() - 0.5);
+
 
 console.log('this');
 export const GameBoard: React.FC = () => {
+    const [filmArray, setFilmArray] = useState<Array<Film>>([]);
     const [leftFilmIndex, setLeftFilmIndex] = useState(0);
     const [rightFilmIndex, setRightFilmIndex] = useState(1);
     const [blankFilmIndex, setBlankFilmIndex] = useState(2);
@@ -22,16 +22,30 @@ export const GameBoard: React.FC = () => {
     const [isMenuOn, setIsMenuOn] = useState(false);
     const [changeBlankColor, setChangeBlankColor] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [colorRArray, setColorRArry] = useState([""]);
-    //recheck
+    const [colorArray, setColorArray] = useState([""]);
+    const [setupColors, setSetupColors] = useState(false);
 
     useEffect(() => {
-        SetupColors(filmArray).then(res => {
-            setColorRArry(res);
-            console.log(colorRArray);
-            setLoading(false);
+        setFilmArray(films as Film[]);
+        setFilmArray((prev) => {
+            prev.sort(() => Math.random() - 0.5);
+            setSetupColors(true);
+            return prev;
         })
     }, []);
+
+    useEffect(() => {
+        if (setupColors) {
+            SetupColors(filmArray).then(res => {
+                setColorArray(res);
+                setLoading(false);
+                setSetupColors(false);
+
+            })
+        }
+
+    }, [setupColors])
+
     const WaitAfterGuessed = (delay: number) => {
         return new Promise(res => setTimeout(res, delay));
     }
@@ -42,11 +56,11 @@ export const GameBoard: React.FC = () => {
         const tempFilmArray = new Array<Film>;
         numArray.sort(() => Math.random() - 0.5);
         for (let i = 0; i < filmArray.length; i++) {
-            tempStrArray[i] = colorRArray[numArray[i]];
+            tempStrArray[i] = colorArray[numArray[i]];
             tempFilmArray[i] = filmArray[numArray[i]];
         }
-        filmArray = tempFilmArray;
-        setColorRArry(tempStrArray);
+        setFilmArray(tempFilmArray);
+        setColorArray(tempStrArray);
     }
 
 
@@ -86,7 +100,16 @@ export const GameBoard: React.FC = () => {
         setIsRatingHidden(true);
         setIsTransitioning(false);
         setGuessResponse("You guessed everything!");
-        sortArrays();
+        if (colorArray.length == filmArray.length) {
+            sortArrays();
+        } else {
+            setFilmArray((prev) => {
+                prev.sort(() => Math.random() - 0.5);
+                setLoading(true);
+                setSetupColors(true);
+                return prev;
+            })
+        }
         setIsMenuOn(false);
     };
 
@@ -99,9 +122,9 @@ export const GameBoard: React.FC = () => {
     }, [highscore]);
 
     useEffect(() => {
-        if (changeBlankColor && colorRArray.length != filmArray.length) {
+        if (changeBlankColor && colorArray.length != filmArray.length) {
             GetBlankColor(filmArray, blankFilmIndex).then(res => {
-                setColorRArry([...colorRArray, res]);
+                setColorArray([...colorArray, res]);
             });
             setChangeBlankColor(false);
         }
@@ -128,10 +151,10 @@ export const GameBoard: React.FC = () => {
 
             <div className={!isMenuOn && !loading ? `${styles.gameboard}` : `${styles.gameboard} ${styles.display_none}`}>
                 <div className={styles.filmcard_wrapper}>
-                    <FilmCard color={{ backgroundColor: colorRArray[leftFilmIndex] }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
+                    <FilmCard color={{ backgroundColor: colorArray[leftFilmIndex] }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
                     <div className={isMenuOn ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
-                    <GuessCard color={{ backgroundColor: colorRArray[rightFilmIndex] }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
-                    <BlankCard color={{ backgroundColor: colorRArray[blankFilmIndex] }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                    <GuessCard color={{ backgroundColor: colorArray[rightFilmIndex] }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
+                    <BlankCard color={{ backgroundColor: colorArray[blankFilmIndex] }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                 </div>
 
                 <div className={isMenuOn ? `${styles.progress_field_wrapper} ${styles.display_none}` : `${styles.progress_field_wrapper}`}>
