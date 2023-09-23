@@ -87,9 +87,9 @@ export const GameBoard: React.FC = () => {
         const leftRating = filmArray[leftFilmIndex].rating;
         const rightRating = filmArray[rightFilmIndex].rating;
         if ((guess === 'more' && leftRating <= rightRating) || (guess === 'less' && leftRating >= rightRating)) {
-            setScore(score + 1);
             setIsRatingHidden(false);
             await WaitAfterGuessed(1500);
+            setScore(score + 1);
             if (score == filmArray.length - 2) {
                 setIsMenuOn(true);
             } else {
@@ -174,13 +174,13 @@ export const GameBoard: React.FC = () => {
             <div className={!isMenuOn && !loading ? `${styles.gameboard}` : `${styles.gameboard} ${styles.display_none}`}>
                 <div className={styles.filmcard_wrapper}>
                     <FilmCard color={size.width > 600 ? { backgroundColor: colorArray[leftFilmIndex] } : { backgroundColor: backgroundColor }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
-                    <div className={isMenuOn ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
+                    <div className={isMenuOn || isTransitioning ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
                     <GuessCard color={size.width > 600 ? { backgroundColor: colorArray[rightFilmIndex] } : { backgroundColor: backgroundColor }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
                     <BlankCard color={size.width > 600 ? { backgroundColor: colorArray[blankFilmIndex] } : { backgroundColor: backgroundColor }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
                 </div>
 
-                <div className={isMenuOn ? `${styles.progress_field_wrapper} ${styles.display_none}` : `${styles.progress_field_wrapper}`}>
-                    <p className={styles.progress_field_text}>{`${leftFilmIndex + 1}/${filmArray.length - 1}`}</p>
+                <div className={isMenuOn || isTransitioning ? `${styles.progress_field_wrapper} ${styles.display_none}` : `${styles.progress_field_wrapper}`}>
+                    <p className={styles.progress_field_text}>{score}</p>
                 </div>
             </div>
         </div>
