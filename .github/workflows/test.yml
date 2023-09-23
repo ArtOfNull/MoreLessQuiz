@@ -9,7 +9,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Test
 
     runs-on: ubuntu-latest
 
