@@ -162,9 +162,9 @@ export const GameBoard: React.FC = () => {
     } else if (loading) {
         return (
             <div className={loading ? styles.loading_screen : `${styles.loading_screen} ${styles.display_none}`}>
-                <div className="spinner">
+                <div className="loading_wrapper">
                     <span>Loading...</span>
-                    <div className="half-spinner"></div>
+                    <div className="spinner"></div>
                 </div>
             </div>
         )

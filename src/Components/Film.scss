@@ -38,10 +38,12 @@ $blue: #13296e;
     z-index: 2;
     color: white;
     font-size: 1.2em;
+    width: 75%;
     font-weight: bold;
 
     h2 {
         font-size: 1.5em;
+        text-align: center;
     }
 }
 
@@ -87,6 +89,29 @@ $blue: #13296e;
     display: none;
 }
 
+@media (max-height: 650px) {
+    $mobile_landscape_scale: 0.8;
+
+
+    .filmcard_rating_wrapper {
+        scale: $mobile_landscape_scale;
+        margin-top: 0;
+    }
+
+
+    .filmcard_title_wrapper {
+        scale: $mobile_landscape_scale;
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        @media (max-width:600px) {
+            margin-top: 2em;
+        }
+    }
+}
+
 @media (min-width: 601px) {
 
     .filmcard_wrapper {
@@ -129,6 +154,30 @@ $blue: #13296e;
 
     .display_none {
         display: none;
+    }
+
+    @media (max-height: 650px) {
+        $mobile_landscape_scale: 0.8;
+
+        .filmcard_poster {
+            scale: $mobile_landscape_scale;
+            margin-top: 1.5em;
+        }
+
+        .filmcard_rating_wrapper {
+            scale: $mobile_landscape_scale;
+            margin-top: 0;
+        }
+
+
+        .filmcard_title_wrapper {
+            scale: $mobile_landscape_scale;
+            margin-top: 0em;
+
+            h2 {
+                font-size: 1.2em;
+            }
+        }
     }
 
 }
