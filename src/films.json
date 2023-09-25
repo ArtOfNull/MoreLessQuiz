@@ -16,7 +16,142 @@
     },
     {
         "name": "Dune (2021)",
-        "rating": 8,
+        "rating": 8.0,
         "logo": "../posters/dune.jpg"
+    },
+    {
+        "name": "American Psycho",
+        "rating": 7.6,
+        "logo": "../posters/american_psycho.png"
+    },
+    {
+        "name": "Top Gun",
+        "rating": 6.9,
+        "logo": "../posters/top_gun.jpg"
+    },
+    {
+        "name": "Alien",
+        "rating": 8.5,
+        "logo": "../posters/alien.jpg"
+    },
+    {
+        "name": "Cars",
+        "rating": 7.2,
+        "logo": "../posters/cars.jpg"
+    },
+    {
+        "name": "12 Angry Men",
+        "rating": 9.0,
+        "logo": "../posters/12_angry_men.jpg"
+    },
+    {
+        "name": "The Bling Ring",
+        "rating": 5.6,
+        "logo": "../posters/bling_ring.jpg"
+    },
+    {
+        "name": "Police Academy",
+        "rating": 6.7,
+        "logo": "../posters/police_academy.jpg"
+    },
+    {
+        "name": "Zootopia",
+        "rating": 8.0,
+        "logo": "../posters/zootopia.jpg"
+    },
+    {
+        "name": "Ace Ventura: Pet Detective",
+        "rating": 6.9,
+        "logo": "../posters/ace_ventura.jpg"
+    },
+    {
+        "name": "World War Z",
+        "rating": 7.2,
+        "logo": "../posters/wwz.jpg"
+    },
+    {
+        "name": "Kill Bill: Vol. 1",
+        "rating": 8.2,
+        "logo": "../posters/kill_bill_vol1.jpg"
+    },
+    {
+        "name": "The Shawshank Redemption",
+        "rating": 9.3,
+        "logo": "../posters/shawshank.jpg"
+    },
+    {
+        "name": "Vertigo",
+        "rating": 8.3,
+        "logo": "../posters/vertigo.jpg"
+    },
+    {
+        "name": "Fight Club",
+        "rating": 8.8,
+        "logo": "../posters/fight_club.jpg"
+    },
+    {
+        "name": "Life of Pi",
+        "rating": 7.9,
+        "logo": "../posters/life_of_pi.jpg"
+    },
+    {
+        "name": "Spirited Away",
+        "rating": 8.6,
+        "logo": "../posters/spirited_away.jpg"
+    },
+    {
+        "name": "Payback",
+        "rating": 7.1,
+        "logo": "../posters/payback.jpg"
+    },
+    {
+        "name": "Shaft",
+        "rating": 6.0,
+        "logo": "../posters/shaft.jpg"
+    },
+    {
+        "name": "Mad Max",
+        "rating": 6.8,
+        "logo": "../posters/mad_max.jpg"
+    },
+    {
+        "name": "John Wick",
+        "rating": 7.4,
+        "logo": "../posters/john_wick.jpg"
+    },
+    {
+        "name": "Cars 2",
+        "rating": 6.2,
+        "logo": "../posters/cars2.jpg"
+    },
+    {
+        "name": "Ghostbusters",
+        "rating": 7.8,
+        "logo": "../posters/ghostbusters.jpg"
+    },
+    {
+        "name": "The Thing",
+        "rating": 8.2,
+        "logo": "../posters/thing.jpg"
+    },
+    {
+        "name": "Jaws",
+        "rating": 8.1,
+        "logo": "../posters/jaws.jpg"
+    },
+    {
+        "name": "Pulp Fiction",
+        "rating": 8.9,
+        "logo": "../posters/pulp_fiction.jpg"
+    },
+    {
+        "name": "The Truman Show",
+        "rating": 8.2,
+        "logo": "../posters/truman_show.jpg"
+    },
+    {
+        "name": "Harry Potter and the Sorcerer's Stone",
+        "rating": 7.6,
+        "logo": "../posters/harry_potter.jpg"
     }
 ]

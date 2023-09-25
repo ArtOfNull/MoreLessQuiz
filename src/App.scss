@@ -30,7 +30,7 @@ body {
     z-index: 0;
 }
 
-.spinner {
+.loading_wrapper {
     color: #fff;
     width: 300px;
     height: 300px;
@@ -38,17 +38,17 @@ body {
     justify-content: center;
     align-items: center;
     background-color: transparent;
+
+    span {
+        font-size: 2rem;
+        padding-right: 1rem;
+    }
 }
 
-.spinner span {
-    font-size: 2rem;
-    padding-right: 1rem;
-}
-
-.half-spinner {
+.spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #03fc4e;
+    border: 3px solid #93bef3;
     border-top: 3px solid transparent;
     border-radius: 50%;
     animation: spin 0.5s linear 0s infinite;
@@ -113,7 +113,7 @@ body {
     justify-content: center;
     align-items: center;
     $progress_field_height: 2em;
-    $progress_field_width: 4.5em;
+    $progress_field_width: 3.5em;
     height: $progress_field_height;
     width: $progress_field_width;
     top: calc(50% - ($progress_field_height / 2));
@@ -132,6 +132,15 @@ body {
 
 .display_none {
     display: none;
+}
+
+
+@media (max-height: 600px) {
+    $mobile_landscape_scale: 0.8;
+
+    .progress_field_wrapper {
+        scale: $mobile_landscape_scale;
+    }
 }
 
 @media (min-width: 601px) {
@@ -157,5 +166,7 @@ body {
     .display_none {
         display: none;
     }
+
+
 
 }
