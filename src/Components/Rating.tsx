@@ -33,7 +33,7 @@ export const Rating: React.FC<FilmRatingProps> = ({ ratingNumber, isHidden }) =>
 
     }, [isHidden]);
 
-    return <p className={styles.filmcard_rating_number}>{ratingDisplay.toFixed(1)}</p>;
+    return <div className={styles.filmcard_rating_number}>{ratingDisplay.toFixed(1)}</div>;
 };
 
 export default Rating;
