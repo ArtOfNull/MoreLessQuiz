@@ -3,7 +3,7 @@
 @import "reset.scss";
 
 $darkblue: #0d142b;
-$lightblue: #263666;
+$lightblue:#273c75;
 $blue: #13296e;
 
 * {
@@ -108,22 +108,23 @@ body {
 }
 
 .progress_field_wrapper {
+    $progress_field_height: 2.5em;
+    $progress_field_width: 2.5em;
+
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    $progress_field_height: 2em;
-    $progress_field_width: 3.5em;
     height: $progress_field_height;
     width: $progress_field_width;
     top: calc(50% - ($progress_field_height / 2));
     left: calc(50% - ($progress_field_width / 2));
     z-index: 10;
-    color: #fff;
-    background-color: $lightblue;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border: 0.1em solid $darkblue;
-    border-radius: 1em;
+    color: $lightblue;
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .progress_field_text {
@@ -143,7 +144,7 @@ body {
     }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 768px) {
 
     .gameboard {
         display: inline-block;

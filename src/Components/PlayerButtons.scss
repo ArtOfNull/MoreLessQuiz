@@ -3,17 +3,15 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    margin-top: 0.3em;
     z-index: 2;
-    padding-top: 2em;
-    min-height: 5em;
-    height: 5em;
+    height: 70px;
+    width: 50%;
 }
 
 $box-shadow-color-red: #cf866c;
 $box-shadow-color-blue: #29bbff;
-$background-color-red: #bc3315;
-$background-color-blue: #0688fa;
+$background-color-red: #c23616;
+$background-color-blue: #2e86de;
 $text-shadow-red: #854629;
 $text-shadow-blue: #263666;
 $background-color-hover-red: #d0451b;
@@ -22,20 +20,21 @@ $text-color: #ffffff;
 $border-color: #0b0e07;
 
 %game_button {
-
-    border-radius: 1.6em;
-    display: inline-block;
+    // border-radius: 1.6em;
+    display: block;
     cursor: pointer;
-    font-family: Verdana;
+    // font-family: Verdana;
     font-size: 0.8em;
     font-weight: bold;
-    width: 50%;
-    max-width: 50%;
-    padding: 0.625em 0.75em;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    border: 1px solid $border-color;
+    width: 48%;
+    max-width: 48%;
+    // padding: 0.625em 0.75em;
+    // box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    // border: 1px solid $border-color;
     color: $text-color;
+    padding: 0.3em 0;
     text-decoration: none;
+    text-align: center;
 }
 
 %game_button:active {
@@ -45,10 +44,9 @@ $border-color: #0b0e07;
 
 .game_button_more {
     @extend %game_button;
-    margin-right: 0.1em;
-    min-width: 50%;
     background-color: $background-color-red;
-    text-shadow: 1px 1px 2px $text-shadow-red;
+    margin-right: 4%;
+    // text-shadow: 1px 1px 2px $text-shadow-red;
 
     &:hover {
         background-color: $background-color-hover-red;
@@ -59,17 +57,12 @@ $border-color: #0b0e07;
         position: relative;
         top: 2px;
     }
-
-
 }
-
 
 .game_button_less {
     @extend %game_button;
-    margin-left: 0.1em;
-    min-width: 50%;
     background-color: $background-color-blue;
-    text-shadow: 1px 1px 2px $text-shadow-blue;
+    // text-shadow: 1px 1px 2px $text-shadow-blue;
 
     &:hover {
         background-color: $background-color-hover-blue;
@@ -114,7 +107,7 @@ $border-color: #0b0e07;
     }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 768px) {
     .buttons {}
 
     .display_none {
