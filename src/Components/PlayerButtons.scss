@@ -20,17 +20,12 @@ $text-color: #ffffff;
 $border-color: #0b0e07;
 
 %game_button {
-    // border-radius: 1.6em;
     display: block;
     cursor: pointer;
-    // font-family: Verdana;
     font-size: 0.8em;
     font-weight: bold;
     width: 48%;
     max-width: 48%;
-    // padding: 0.625em 0.75em;
-    // box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    // border: 1px solid $border-color;
     color: $text-color;
     padding: 0.3em 0;
     text-decoration: none;
@@ -46,7 +41,6 @@ $border-color: #0b0e07;
     @extend %game_button;
     background-color: $background-color-red;
     margin-right: 4%;
-    // text-shadow: 1px 1px 2px $text-shadow-red;
 
     &:hover {
         background-color: $background-color-hover-red;
@@ -62,7 +56,6 @@ $border-color: #0b0e07;
 .game_button_less {
     @extend %game_button;
     background-color: $background-color-blue;
-    // text-shadow: 1px 1px 2px $text-shadow-blue;
 
     &:hover {
         background-color: $background-color-hover-blue;
@@ -108,7 +101,6 @@ $border-color: #0b0e07;
 }
 
 @media (min-width: 768px) {
-    .buttons {}
 
     .display_none {
         display: none;
