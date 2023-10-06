@@ -4,12 +4,13 @@ import { FilmCard, Film, GuessCard, BlankCard } from './Film';
 import { RestartButton } from './PlayerButtons';
 import styles from '../App.module.scss';
 import { SetupColors, GetBlankColor } from '../ColorManager';
+import { Carousel } from "react-responsive-carousel"
+
 
 export const GameBoard: React.FC = () => {
     const [filmArray, setFilmArray] = useState<Array<Film>>([]);
-    const [leftFilmIndex, setLeftFilmIndex] = useState(0);
-    const [rightFilmIndex, setRightFilmIndex] = useState(1);
-    const [blankFilmIndex, setBlankFilmIndex] = useState(2);
+    const [indexes, setIndexes] = useState<Array<number>>([0, 1, 2]);
+    const [guessedFilmsArray, setGuessedFilmsArray] = useState<Array<Film>>([]);
     const [score, setScore] = useState(0);
     const storedHighscore = window.localStorage.getItem('highscore');
     const initialHighscore = storedHighscore ? JSON.parse(storedHighscore) : 0;
@@ -23,14 +24,18 @@ export const GameBoard: React.FC = () => {
     const [colorArray, setColorArray] = useState([""]);
     const [setupColors, setSetupColors] = useState(false);
 
-
     useEffect(() => {
         setFilmArray(films as Film[]);
         setFilmArray((prev) => {
             prev.sort(() => Math.random() - 0.5);
+            setGuessedFilmsArray((prevSub) => {
+                prevSub = prev.slice(0, 4);
+                return prevSub;
+            });
             setSetupColors(true);
             return prev;
         })
+
     }, []);
 
     useEffect(() => {
@@ -61,6 +66,15 @@ export const GameBoard: React.FC = () => {
         }
         setFilmArray(tempFilmArray);
         setColorArray(tempStrArray);
+    }
+
+    const incrementIndexes = () => {
+        setIndexes((indexes) => {
+            console.log("twice"
+            )
+            indexes[score % 3] = (indexes[score % 3] == filmArray.length - 1) ? 0 : indexes[score % 3] + 3;
+            return [...indexes];
+        })
     }
 
 
@@ -155,9 +169,9 @@ export const GameBoard: React.FC = () => {
             <div className={!isMenuOn && !loading ? `${styles.gameboard}` : `${styles.gameboard} ${styles.display_none}`}>
                 <div className={styles.filmcard_wrapper}>
                     <div className={isMenuOn || isTransitioning ? `${styles.film_divider} ${styles.display_none}` : `${styles.film_divider}`}></div>
-                    <FilmCard color={{ backgroundColor: colorArray[leftFilmIndex] }} film={filmArray[leftFilmIndex]} transition={isTransitioning} />
-                    <GuessCard color={{ backgroundColor: colorArray[rightFilmIndex] }} film={filmArray[rightFilmIndex]} transition={isTransitioning} isHidden={isRatingHidden} OnClick={handleGuess} />
-                    <BlankCard color={{ backgroundColor: colorArray[blankFilmIndex] }} film={filmArray[blankFilmIndex]} transition={isTransitioning} />
+                    {guessedFilmsArray.map((film, index) => {
+                        return <GuessCard key={film.logo} color={{ backgroundColor: colorArray[indexes[index]] }} film={film} filmIndex={indexes[index]} isTransitioning={isTransitioning} guessedCardTracker={score + 1} isRatingHidden={isRatingHidden} OnClick={handleGuess} />
+                    })}
                 </div>
 
                 <div className={isMenuOn || isTransitioning ? `${styles.progress_field_wrapper} ${styles.display_none}` : `${styles.progress_field_wrapper}`}>
