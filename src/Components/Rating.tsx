@@ -4,11 +4,11 @@ import styles from '../App.module.scss'
 interface FilmRatingProps {
     ratingNumber: number;
     isHidden?: boolean;
+    isGuessed?: boolean;
 }
 
-export const Rating: React.FC<FilmRatingProps> = ({ ratingNumber, isHidden }) => {
+export const Rating: React.FC<FilmRatingProps> = ({ ratingNumber, isHidden, isGuessed }) => {
     const [ratingDisplay, setRatingDisplay] = useState<number>(0);
-
     useEffect(() => {
         const animationDuration = 1000;
         const animationSteps = 10;
@@ -33,7 +33,7 @@ export const Rating: React.FC<FilmRatingProps> = ({ ratingNumber, isHidden }) =>
 
     }, [isHidden]);
 
-    return <div className={styles.filmcard_rating_number}>{ratingDisplay.toFixed(1)}</div>;
+    return <div className={styles.filmcard_rating_number}>{isGuessed ? ratingDisplay.toFixed(1) : ratingNumber}</div>;
 };
 
 export default Rating;

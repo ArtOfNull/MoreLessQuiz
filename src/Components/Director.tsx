@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import films from '../films.json';
-import { FilmCard, Film, GuessCard, BlankCard } from './Film';
+import { Film, GuessCard } from './Film';
 import { RestartButton } from './PlayerButtons';
 import styles from '../App.module.scss';
 import { SetupColors, GetBlankColor } from '../ColorManager';
-import { Carousel } from "react-responsive-carousel"
 
 
 export const GameBoard: React.FC = () => {
@@ -28,9 +27,9 @@ export const GameBoard: React.FC = () => {
         setFilmArray(films as Film[]);
         setFilmArray((prev) => {
             prev.sort(() => Math.random() - 0.5);
-            setGuessedFilmsArray((prevSub) => {
-                prevSub = prev.slice(0, 4);
-                return prevSub;
+            setGuessedFilmsArray((guessed) => {
+                guessed = [prev[indexes[0]], prev[indexes[1]], prev[indexes[2]]];
+                return guessed;
             });
             setSetupColors(true);
             return prev;
@@ -68,21 +67,14 @@ export const GameBoard: React.FC = () => {
         setColorArray(tempStrArray);
     }
 
-    const incrementIndexes = () => {
-        setIndexes((indexes) => {
-            console.log("twice"
-            )
-            indexes[score % 3] = (indexes[score % 3] == filmArray.length - 1) ? 0 : indexes[score % 3] + 3;
-            return [...indexes];
-        })
-    }
 
 
     const handleGuess = async (guess: 'more' | 'less') => {
-        const leftRating = filmArray[leftFilmIndex].rating;
-        const rightRating = filmArray[rightFilmIndex].rating;
+        const leftRating = filmArray[score].rating;
+        const rightRating = filmArray[score + 1].rating;
         if ((guess === 'more' && leftRating <= rightRating) || (guess === 'less' && leftRating >= rightRating)) {
             setIsRatingHidden(false);
+            console.log(filmArray);
             await WaitAfterGuessed(1500);
             setScore(score + 1);
             if (score == filmArray.length - 2) {
@@ -91,11 +83,20 @@ export const GameBoard: React.FC = () => {
                 setIsTransitioning(true);
                 await WaitAfterGuessed(500);
                 setIsRatingHidden(true);
-                setLeftFilmIndex(rightFilmIndex);
-                setRightFilmIndex(blankFilmIndex);
-                setBlankFilmIndex(blankFilmIndex == filmArray.length - 1 ? 0 : blankFilmIndex + 1);
+                setIndexes((prevIndexes) => {
+                    prevIndexes = [prevIndexes[0] + 1, prevIndexes[1] + 1, prevIndexes[2] > filmArray.length - 2 ? 0 : prevIndexes[2] + 1];
+                    setGuessedFilmsArray((prevGuessedFilms) => {
+                        prevGuessedFilms = [filmArray[prevIndexes[0]], filmArray[prevIndexes[1]], filmArray[prevIndexes[2]]];
+                        return prevGuessedFilms;
+                    });
+                    return prevIndexes;
+                });
+
+
+
                 setIsTransitioning(false);
                 setChangeBlankColor(true);
+
             }
 
         } else {
@@ -106,10 +107,12 @@ export const GameBoard: React.FC = () => {
         }
     };
 
+
+
     const restartGame = () => {
-        setLeftFilmIndex(0);
-        setRightFilmIndex(1);
-        setBlankFilmIndex(2);
+        setIndexes(() => {
+            return [0, 1, 2];
+        })
         setScore(0);
         setIsRatingHidden(true);
         setIsTransitioning(false);
@@ -137,7 +140,7 @@ export const GameBoard: React.FC = () => {
 
     useEffect(() => {
         if (changeBlankColor && colorArray.length != filmArray.length) {
-            GetBlankColor(filmArray, blankFilmIndex).then(res => {
+            GetBlankColor(filmArray, score + 2).then(res => {
                 setColorArray([...colorArray, res]);
             });
             setChangeBlankColor(false);
