@@ -63,7 +63,14 @@ export const GameBoard: React.FC = () => {
             tempStrArray[i] = colorArray[numArray[i]];
             tempFilmArray[i] = filmArray[numArray[i]];
         }
-        setFilmArray(tempFilmArray);
+        setFilmArray((prev) => {
+            prev = tempFilmArray;
+            setGuessedFilmsArray((guessed) => {
+                guessed = [prev[indexes[0]], prev[indexes[1]], prev[indexes[2]]];
+                return guessed;
+            });
+            return prev;
+        });
         setColorArray(tempStrArray);
     }
 
@@ -109,27 +116,29 @@ export const GameBoard: React.FC = () => {
 
 
     const restartGame = () => {
-        setIndexes(() => {
-            return [0, 1, 2];
-        })
         setScore(0);
         setIsRatingHidden(true);
         setIsTransitioning(false);
         setGuessResponse("You guessed everything!");
-        if (colorArray.length == filmArray.length) {
-            sortArrays();
-        } else {
-            setFilmArray((prev) => {
-                prev.sort(() => Math.random() - 0.5);
-                setGuessedFilmsArray((guessed) => {
-                    guessed = [prev[indexes[0]], prev[indexes[1]], prev[indexes[2]]];
-                    return guessed;
-                });
-                setLoading(true);
-                setSetupColors(true);
-                return prev;
-            })
-        }
+        setIndexes((prevInd) => {
+            prevInd = [0, 1, 2];
+            if (colorArray.length == filmArray.length) {
+                sortArrays();
+            } else {
+                setFilmArray((prev) => {
+                    prev.sort(() => Math.random() - 0.5);
+                    setGuessedFilmsArray((guessed) => {
+                        guessed = [prev[prevInd[0]], prev[prevInd[1]], prev[prevInd[2]]];
+                        return guessed;
+                    });
+                    setLoading(true);
+                    setSetupColors(true);
+                    return prev;
+                })
+            }
+            return prevInd;
+        })
+
         setIsMenuOn(false);
     };
 
