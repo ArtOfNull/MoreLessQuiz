@@ -9,7 +9,8 @@ env:
   AWS_REGION: eu-central-1
   S3_BUCKET_NAME: more-or-less-quiz
   NODE_VERSION: 20.1.0
-
+  CLOUDFRONT_DISTRIBUTION_ID: E2W3FYXOBHEXP5
+  
 jobs:
   deploy:
     name: Deploy
@@ -40,3 +41,9 @@ jobs:
 
     - name: Deploy to S3
       run: aws s3 sync ./build "s3://${{ env.S3_BUCKET_NAME }}"
+
+    - name: Request Invalidation to AWS Cloudfront
+      uses: oneyedev/aws-cloudfront-invalidation@v1
+      with:
+        distribution-id: ${{ env.CLOUDFRONT_DISTRIBUTION_ID }}
+        paths: /*
