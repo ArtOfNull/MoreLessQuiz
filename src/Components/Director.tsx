@@ -74,7 +74,6 @@ export const GameBoard: React.FC = () => {
         const rightRating = filmArray[score + 1].rating;
         if ((guess === 'more' && leftRating <= rightRating) || (guess === 'less' && leftRating >= rightRating)) {
             setIsRatingHidden(false);
-            console.log(filmArray);
             await WaitAfterGuessed(1500);
             setScore(score + 1);
             if (score == filmArray.length - 2) {
@@ -122,6 +121,10 @@ export const GameBoard: React.FC = () => {
         } else {
             setFilmArray((prev) => {
                 prev.sort(() => Math.random() - 0.5);
+                setGuessedFilmsArray((guessed) => {
+                    guessed = [prev[indexes[0]], prev[indexes[1]], prev[indexes[2]]];
+                    return guessed;
+                });
                 setLoading(true);
                 setSetupColors(true);
                 return prev;
